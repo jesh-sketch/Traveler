@@ -11,6 +11,7 @@ public class game{
         int busA = 2;
         int busB = 4;
         int eat = 1;
+        // which bus did you enter
         if (pchoice == 1){
             System.out.println("you chose busA ");
             time =time+ busA;
@@ -22,19 +23,22 @@ public class game{
         }
         //pchoice 
         pchoice = (int)(Math.random() * 2) + 1;
+        // if you choose to eat how much time do you have if not how much 
         if(pchoice == 1){
             System.out.println("you chose to wait and eat. the time is"+ WasteTime(eat , time));
         }else if(pchoice == 2){
             System.out.println("you chose to wait and eat. the time is"+ time);
         }
+        // did you make it on time
          CheckTime(time);
 
     }
+    // method for activities other than bus that waste time
     public static int WasteTime(int wasteType, int time){
         time = time + wasteType;
         return time;
     }
-
+// method to check if time is past
     public static void CheckTime(int time){
         if(time >= 10){
             System.out.println("you are late, you have missed the bus");
@@ -42,5 +46,12 @@ public class game{
             System.out.println("you made it on time");
         }
     }
+    //method to chek the time
+    public static void tellTime(int time){
+        System.out.println("the time is "+time);
+    }
+    public static void ChooseBus(int choice ,  ){
+
+    };
 
 }
