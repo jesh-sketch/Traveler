@@ -50,8 +50,5 @@ public class game{
     public static void tellTime(int time){
         System.out.println("the time is "+time);
     }
-    public static void ChooseBus(int choice ,  ){
-
-    };
-
-}
+ 
+    }
