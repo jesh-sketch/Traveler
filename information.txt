@@ -1,1 +1,21 @@
+Stats
+hunger bar: starting hunger 80% slowly drains as you progess due hunger/thirst increase by eating and thirsty (if hunger is 100% you need take a break and use the toilet)
 
+sanity bar: starting santiy 100% slowly drains as you progess due to boredem, increase by doing something like watching a film, playings games or reading a book when an oppertunity arrived you will starting taking dmg once your sanity is below 30% and if it reaches zero your hp will drain twice as fast
+health bar: starting health 100% taken dmg due to crash lowers it, lacking of food and sanity bar reaches 30% or lower then you start taking dmg once health bar is 0% you will go back home and sleep losing the game
+
+time: show the time and certian actcion dictate your time to reach your destination your jounery starts at 10am and will need to get your destination before 6pm if your are more than 10mins late you lose due the flight leaving if you arrived on time or early you win
+
+Cash: this will what you will use to buy food and entertainment
+
+
+Main points:
+you will take different of your choice bus to reach the airport on time but each of the bus have different chances of event happening base on the times the longer that bus takes to reach a setpoints the less chance of an event and vise-versa
+
+4 checkpoints aberdeen, glasgow, manchester and london
+
+
+Events:
+extreme hunger infliction: you have become extremely hungery do you wish to get of the bus and go eat which will add on an 1hr to 30mins on to the time but will increase your hunger depending on which fast-food or resturants you go to.
+roadblock: due a roadblock your buss takes and detour but will have 50% chance to taken off your travel time or add on ranging from 45mins to 15ins
+sickeness: due to eating something raw you have must take a 2hrs detour to go a hospital to be heal if 
