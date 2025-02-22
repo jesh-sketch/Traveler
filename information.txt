@@ -1,7 +1,10 @@
 Stats
-hunger bar: starting hunger 80% slowly drains as you progess due hunger/thirst increase by eating and thirsty (if hunger is 100% you need take a break and use the toilet)
+hunger bar: starting hunger 80% slowly drains as you progess due hunger/thirst increase by eating and thirsty (if hunger is 100% you need take a break and use the toilet) every 1hr you will lose 10% of your hunger
+hp drain below 20% and more than 0%
 
-sanity bar: starting santiy 100% slowly drains as you progess due to boredem, increase by doing something like watching a film, playings games or reading a book when an oppertunity arrived you will starting taking dmg once your sanity is below 30% and if it reaches zero your hp will drain twice as fast
+sanity bar: starting santiy 100% slowly drains as you progess due to boredem, increase by doing something like watching a film, playings games or reading a book when an oppertunity arrived you will starting taking dmg once your sanity is below 30% and if it reaches zero your hp will drain twice as fast  
+hp drain below 30% and more 1% is 5% every hour
+every 1hr you will lose 10% of your sanity
 
 health bar: starting health 100% taken dmg due to crash lowers it, lacking of food and sanity bar reaches 30% or lower then you start taking dmg once health bar is 0% you will go back home and sleep/heal losing the game
 
@@ -14,18 +17,76 @@ Main points:
 you will take different of your choice bus to reach the airport on time but each of the bus have different chances of event happening base on the times the longer that bus takes to reach a setpoints the less chance of an event and vise-verse
 
 5 checkpoints aberdeen, edinburgh, manchester, birmingham and london
-once reaching the 3rd checkpoint there will be a sanity check and hunger check if below a certain percentange you will be force to take detour to increase your bar
+once reaching the 3rd checkpoint there will be a sanity check and hunger check if below or equal to 50% you will be force to take detour to increase your bar
 
 win:
-you get there on time with health above: 50%
-you get there early health above: 70%
+basic win: get there on time with health 50% and above also santiy and hunger bar is above 40% and above 
+early bird win: get there earlier than 30mins with health equal to 50% also santiy and hunger bar is above 50% and above
+flawless win: get there more 1hr ealier with hp = 100% and santiy and hunger bar is 80% or more
 
 lose: 
-if health reach 0% you lose
-if you arrive 10mins late you lose
+if you arrive at your destination with health below 50% also santiy and hunger bar is less than 40% due to fatguie 
+if health reach 0% at anypoint
+if you arrive 10mins late or more you lose
 
 
 Events:
-extreme hunger infliction: you have become extremely hungery do you wish to get of the bus and go eat which will add on an 1hr to 30mins on to the time but will increase your hunger depending on which fast-food or resturants you go to.
-roadblock: due a roadblock your buss takes and detour but will have 50% chance to taken off your travel time or add on ranging from 45mins to 15mins this can also lower your sanity bar if there is a delay
+extreme hunger infliction: you have become extremely hungery do you wish to get of the bus and go eat which will add on an 1hr to 30mins on to the time but will increase your hunger depending on which fast-food or resturants you go to. your hunger will also lose 30% suddenly
+
+roadblock: due a roadblock your buss takes and detour but this will have 20% chance to taken off your travel time and an 80% to add on ranging from 45mins to 15mins this can also lower your sanity bar if there is a delay by 20%
+
 sickeness: due to eating something raw you have must take a 1hrs detour to go a hospital to be heal of the sickness and will take your cash
+
+traffic accident: there was a crash you have lost 20% of your hp and 35% of your sanity and hungery you will need to rest for 2hrs
+
+(weather events only happens once if it chosen)
+Sudden weather change: the weather turns to the worse and heavy rains begins making the road more dangerous sanity drain increase from 5% to 10% as your mood is dampen by the heavy rain
+
+time 
+40 mins - 55 mins = 80% event chance
+1 hr - 1hr 30 mins = 60% event chance 
+1 hr 35 mins to 2 hrs =  40% event chance3
+2 hrs+ = 20% chance for event
+the randomised option will always be 50% chance it unless bus time is less than 55 mins then its 80%
+
+pathways = checkpoint
+
+pathways1 aberdeen to edinburgh: 
+busA 1 hr  
+busB from 40 mins to 1 hr 30 mins 
+busC 1 hr 10 mins 
+busD 45 mins
+
+
+pathway2 edinburgh to manchester:
+bus1A 2 hrs  
+bus2A 1 hr 30 mins  
+
+bus1B 1 hr 25 mins
+bus2B 1 hr 55 mins
+
+bus1C 3 hrs
+bus2C 1 hr 20 mins
+
+bus1D 1 hrs 30 to 2 hrs 30mins 
+bus2D 1 hr
+
+pathway3 manchester to birmingham:
+busA 1 hr 30mins 
+busB 55 mins
+busC from 1 hr to 1 hr 50 mins
+busD 2 hrs
+ 
+
+pathway4 manchester to birmingham:
+busA from 45 mins to 1 hr 5 mins 
+busB 40 mins 
+busC 1 hr mins
+busD 1 hr 15 mins
+
+
+pathway5 birmingham to london:
+busA from 40 mins to 55 mins
+busB from 40 mins to 55 mins
+busC from 40 mins to 55 mins
+busD 1 hr
