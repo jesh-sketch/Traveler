@@ -48,7 +48,7 @@ public class game{
     }
     //method to chek the time
     public static void tellTime(int time){
-        System.out.println("the time is "+time);
+        System.out.println("the tyime is "+time);
     }
  
     }
