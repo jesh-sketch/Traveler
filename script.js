@@ -9,9 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let hunger = 5;
   let hasEaten = false;
   let waitCount = 0;
-  let gmLostInterest = false; // Tracks if the GM leaves
+  let genieLostInterest = false;
   let currentStopIndex = 0;
   let isOnBus = false;
+  let genieRefusals = 0;
   const stops = ["Aberdeen", "Hilton", "Ellon", "Edinburgh", "Glasgow"];
   let bus = {};
 
@@ -32,22 +33,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function checkStop() {
       if (currentStopIndex >= stops.length) {
-          appendMessage("Game Master", "You've reached your destination!");
+          appendMessage("Genie", "You've reached your destination!");
           return;
       }
 
       let stop = stops[currentStopIndex];
-      appendMessage(gmLostInterest ? "Bus" : "Game Master", `You have arrived at ${stop}. The time is now ${time}:00.`);
-
+      appendMessage("Genie", `You have arrived at ${stop}. The time is now ${time}:00.`);
       bus = generateBus();
-
+      
       if (currentStopIndex === 0) {
-          appendMessage("Game Master", "There's a free bus here. Do you get on? (Yes/No)");
-      } else if (!gmLostInterest) {
-          appendMessage("Game Master", `There's a bus available: <br>${bus.name} | Duration: ${bus.duration} hours | Price: $${bus.price}`);
-          appendMessage("Game Master", "You can 'Yes' to board, 'No' to wait, or 'eat' to eat.");
+          appendMessage("Genie", "There's a free bus here. Do you get on? (Yes/No)");
       } else {
-          appendMessage("Bus", "The bus is here. Type 'Yes' to board.");
+          appendMessage("Genie", `There's a bus available: <br>${bus.name} | Duration: ${bus.duration} hours | Price: $${bus.price}`);
+          appendMessage("Genie", "You can 'Yes' to board, 'No' to wait, or 'eat' to eat.");
       }
   }
 
@@ -59,98 +57,82 @@ document.addEventListener("DOMContentLoaded", () => {
       };
   }
 
-  function handleWait() {
-      if (currentStopIndex !== 0) {
-          appendMessage("Game Master", "You can't wait here. Pick a real option.");
-          return;
-      }
-
-      waitCount++;
-      if (waitCount === 1) {
-          appendMessage("Game Master", "Standing around, huh? Bold move.");
-      } else if (waitCount === 2) {
-          appendMessage("Game Master", "Still here? Maybe you're hoping for... I don’t know, divine intervention?");
-      } else if (waitCount === 3) {
-          gmLostInterest = true;
-          appendMessage("Game Master", "You know what? I'm done. Enjoy your trip, or whatever.");
-          setTimeout(() => {
-              appendMessage("Bus", "The bus arrives. Type 'Yes' to board.");
-          }, 2000);
-      }
-  }
-
-  function showStats() {
-      appendMessage("Game Master", `Stats: Time - ${time}:00 | Money - $${money} | Hunger - ${hunger} | Eaten - ${hasEaten ? "Yes" : "No"}`);
-  }
-
   sendButton.addEventListener("click", (event) => {
       event.preventDefault();
       let userInput = inputField.value.trim().toLowerCase();
       if (!userInput) return;
       appendMessage("You", userInput, true);
-
-      if (gmLostInterest && currentStopIndex === 0) {
-          if (userInput === "yes") {
-              appendMessage("Bus", "You board the bus and reach your destination without any more trouble.");
-              setTimeout(() => appendMessage("Game Master", "You win!"), 2000);
-          } else {
-              appendMessage("Bus", "The bus is waiting. Type 'Yes' to board.");
-          }
-      } else if (currentStopIndex === 0 && !isOnBus) {
-          if (userInput === "yes") {
+      
+      if (currentStopIndex === 0) {
+          if (userInput === "no") {
+              genieRefusals++;
+              if (genieRefusals >= 3) {
+                  appendMessage("Genie", "Hmph. Fine. Have it your way.");
+                  setTimeout(() => {
+                      appendMessage("Genie", "You board the bus and reach your destination without any more trouble.");
+                      setTimeout(() => appendMessage("Genie", "You win!"), 2000);
+                  }, 2000);
+              } else {
+                  appendMessage("Genie", "Are you sure? You might regret it.");
+              }
+          } else if (userInput === "yes") {
+              appendMessage("Genie", "Alright, here we go.");
               time += bus.duration;
               isOnBus = true;
-              appendMessage("Game Master", "Alright, here we go.");
               setTimeout(() => {
                   currentStopIndex++;
                   isOnBus = false;
                   checkStop();
               }, 2000);
-          } else if (userInput === "no") {
-              handleWait();
           } else {
-              appendMessage("Game Master", "That’s not an option.");
+              appendMessage("Genie", "That’s not an option.");
           }
       } else if (!isOnBus) {
           if (userInput === "eat") {
-              if (hunger > 1) {
-                  hunger--;
-                  time += 2;
-                  hasEaten = true;
-                  appendMessage("Game Master", "You eat, but the bus leaves. You'll wait for another.");
-                  setTimeout(checkStop, 3000);
+              hunger = 5;
+              time += 2;
+              hasEaten = true;
+              
+              if (currentStopIndex === 1) {
+                  appendMessage("Genie", "Oh no, you ate and your bus left. How unfortunate.");
+                  setTimeout(() => {
+                      appendMessage("Genie", "The next bus? It breaks down halfway. Now you’re stranded.");
+                      appendMessage("Genie", "With no way forward, you have to turn back home. Game over.");
+                  }, 3000);
               } else {
-                  hunger = 5;
-                  time += 4;
-                  hasEaten = true;
-                  appendMessage("Game Master", "You're starving! You eat and waste 4 hours.");
+                  appendMessage("Genie", "You eat and wait for another bus.");
                   setTimeout(checkStop, 3000);
               }
           } else if (userInput === "yes") {
               time += bus.duration;
               money -= bus.price;
               if (money < 0) {
-                  appendMessage("Game Master", "You can't afford that. Pick something else.");
+                  appendMessage("Genie", "Oh dear, you can’t afford that.");
                   return;
               }
-              appendMessage("Game Master", "On the bus we go.");
+              appendMessage("Genie", "On the bus we go.");
               setTimeout(() => {
                   currentStopIndex++;
                   isOnBus = false;
-                  checkStop();
+                  
+                  if (currentStopIndex === 2 && !hasEaten) {
+                      appendMessage("Genie", "Oh no, your wallet was stolen!");
+                      setTimeout(() => {
+                          appendMessage("Genie", "By the time someone helps you, it's too late. You decide to go home. Game over.");
+                      }, 3000);
+                  } else {
+                      checkStop();
+                  }
               }, 2000);
           } else if (userInput === "no") {
-              appendMessage("Game Master", "No waiting here. Make a real choice.");
-          } else if (userInput === "stats") {
-              showStats();
+              appendMessage("Genie", "No waiting here. Make a real choice.");
           } else {
-              appendMessage("Game Master", "Pick a valid option.");
+              appendMessage("Genie", "Pick a valid option.");
           }
       }
-
       inputField.value = "";
   });
 
-  appendMessage("Game Master", "Welcome to the traveler's game!");
+  appendMessage("Genie", "Welcome to the traveler's game!");
   checkStop();
 });
