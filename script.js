@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
                       setTimeout(() => appendMessage("Genie", "You win!"), 2000);
                   }, 2000);
               } else {
-                  appendMessage("Genie", "Are you sure? You might regret it.");
+                  appendMessage("Genie", "Are you sure? You might regret it. choose agai yes or no!");
               }
           } else if (userInput === "yes") {
               appendMessage("Genie", "Alright, here we go.");
