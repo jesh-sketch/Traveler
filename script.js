@@ -136,3 +136,37 @@ document.addEventListener("DOMContentLoaded", () => {
   appendMessage("Genie", "Welcome to the traveler's game!");
   checkStop();
 });
+// Function to check stats
+function checkStats() {
+  appendMessage("Genie", `Current Stats: 
+  Money: $${money} 
+  Time: ${time}:00
+  Hunger: ${hunger} 
+  Has eaten: ${hasEaten ? "Yes" : "No"}
+  Wait Count: ${waitCount} 
+  Genie refusals: ${genieRefusals}`);
+}
+
+// Function to reset the game
+function resetGame() {
+  money = 50;
+  time = 6;
+  hunger = 5;
+  hasEaten = false;
+  waitCount = 0;
+  genieRefusals = 0;
+  currentStopIndex = 0;
+  isOnBus = false;
+  
+  // Clear chat history
+  chatBox.innerHTML = '';
+  
+  // Start a new game
+  appendMessage("Genie", "Welcome to the traveler's game!");
+  checkStop();
+}
+
+// Add event listeners for the buttons
+document.getElementById('reset-btn').addEventListener('click', resetGame);
+document.getElementById('check-stats-btn').addEventListener('click', checkStats);
+
