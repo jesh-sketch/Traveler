@@ -1,54 +1,80 @@
-//import java.util.Scanner;
+import java.util.Random;
+import java.util.Scanner;
 
-public class game{
+public class game {
     public static void main(String[] args) {
-        //Scanner scanner = new Scanner(System.in);
-        //int pchoice = scanner.nextInt();
-        int pchoice = (int)(Math.random() * 2) + 1;
-        int time = 6;
-        System.out.println("you have to get to london by 10:00, its 6:00");
-        System.out.println(" you are at the bus  stop you can choose to either'1' for busA which takes 2 hours or '2' for busB which takes 4 hours");
-        int busA = 2;
-        int busB = 4;
-        int eat = 1;
-        // which bus did you enter
-        if (pchoice == 1){
-            System.out.println("you chose busA ");
-            time =time+ busA;
-            System.out.println("you arrived halfway by "+ time+ " "+" oclock do you want to eat before you leave 1 for yes 2 for no");
-        }else if (pchoice == 2){
-            System.out.println("you chose busB");
-            time = time + busB;
-            System.out.println("you arrived halfway by "+ time + " " + " oclock do you want to eat before you leave 1 for yes, 2 for no");
-        }
-        //pchoice 
-        pchoice = (int)(Math.random() * 2) + 1;
-        // if you choose to eat how much time do you have if not how much 
-        if(pchoice == 1){
-            System.out.println("you chose to wait and eat. the time is"+ WasteTime(eat , time));
-        }else if(pchoice == 2){
-            System.out.println("you chose to wait and eat. the time is"+ time);
-        }
-        // did you make it on time
-         CheckTime(time);
+        Scanner scanner = new Scanner(System.in);
+        int time = 6; // Start at 6 AM
+        String stop;
 
+        // Go through different stops and update time
+        time = checkStop("Aberdeen", time, scanner);
+        tellTime(time);
+
+        time = checkStop("Hilton", time, scanner);
+        tellTime(time);
+
+        time = checkStop("Ellon", time, scanner);
+        tellTime(time);
+        
+        scanner.close();
     }
-    // method for activities other than bus that waste time
-    public static int WasteTime(int wasteType, int time){
-        time = time + wasteType;
-        return time;
+
+    public static void tellTime(int time) {
+        System.out.println("The time is " + time + ":00");
     }
-// method to check if time is past
-    public static void CheckTime(int time){
-        if(time >= 10){
-            System.out.println("you are late, you have missed the bus");
-        }else{
-            System.out.println("you made it on time");
+
+    public static int checkStop(String stop, int time, Scanner scanner) {
+        if (time < 10) {
+            System.out.println("You have arrived at " + stop + " by " + time + ":00");
+            return generateRandomBuses(3, time, stop, scanner);
+        } else if (time < 14) {
+            System.out.println("You have arrived at " + stop + " by " + time + ":00");
+            return generateRandomBuses(2, time, stop, scanner);
+        } else if (time < 18) {
+            System.out.println("You have arrived at " + stop + " by " + time + ":00");
+            return generateRandomBuses(1, time, stop, scanner);
+        } else {
+            System.out.println("You have failed, you are too late.");
+            return time;
         }
     }
-    //method to chek the time
-    public static void tellTime(int time){
-        System.out.println("the tyime is "+time);
+
+    public static int generateRandomBuses(int numberOfBuses, int time, String stop, Scanner scanner) {
+        Random random = new Random();
+        bus[] buses = new bus[numberOfBuses];
+
+        for (int i = 0; i < numberOfBuses; i++) {
+            String busName = "bus " + (char) ('a' + i);
+            int duration = random.nextInt(4) + 1; // Duration between 1 and 4 hours
+            int price = (random.nextInt(10) + 1) * 5; // Price between $5 and $50 (multiples of 5)
+
+            buses[i] = new bus(busName, duration, price);
+        }
+
+        System.out.println("At " + stop + ", you can choose from the following buses:");
+        for (int i = 0; i < buses.length; i++) {
+            System.out.println((i + 1) + ". " + buses[i]);
+        }
+
+        // Asking the player to choose a bus
+        int pChoice;
+        while (true) {
+            System.out.print("Enter the number of your chosen bus (1-" + buses.length + "): ");
+            if (scanner.hasNextInt()) {
+                pChoice = scanner.nextInt();
+                if (pChoice >= 1 && pChoice <= buses.length) {
+                    break; // Valid choice
+                }
+            }
+            scanner.nextLine(); // Clear invalid input
+            System.out.println("Invalid choice. Please enter a valid bus number.");
+        }
+
+        System.out.println("You have chosen: " + buses[pChoice - 1]);
+
+        // Update time in HOURS
+        return time + buses[pChoice - 1].getDuration();
     }
- 
-    }
+}
+22
