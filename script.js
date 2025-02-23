@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
           appendMessage("Genie", "There's a free bus here. Do you get on? (Yes/No)");
       } else {
           appendMessage("Genie", `There's a bus available: <br>${bus.name} | Duration: ${bus.duration} hours | Price: $${bus.price}`);
-          appendMessage("Genie", "You can 'Yes' to board, 'No' to wait, or 'eat' to eat.");
+          appendMessage("Genie", "You can type 'Yes' to board, 'No' to wait, or 'eat' to eat.");
       }
   }
 
@@ -162,7 +162,7 @@ function resetGame() {
   chatBox.innerHTML = '';
   
   // Start a new game
-  appendMessage("Genie", "Welcome to the traveler's game!");
+  appendMessage("Genie", "Welcome to the traveller's game!");
   checkStop();
 }
 
